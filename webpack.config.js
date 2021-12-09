@@ -1,5 +1,7 @@
 // path は、パス文字列を操作するための node.js ビルドインのツール
 const path = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   // デバッグ情報を付与する。
@@ -7,7 +9,7 @@ module.exports = {
   // コードが最適化されサイズが小さくなる。
   mode: "development",
   // 初めに読み込まれるファイル
-  entry: "./src/index.ts",
+  entry: "./src/index.tsx",
   // 出力先の設定
   output: {
     // 出力先ファイル名
@@ -28,5 +30,16 @@ module.exports = {
   resolve: {
     // import する対象の拡張子
     extensions: [".ts", ".tsx", ".js", ".jsx"],
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: "resources/index.html",
+    }),
+  ],
+  devServer: {
+    static: path.join(__dirname, "dist"),
+    compress: true,
+    port: 8080,
   },
 };
