@@ -17,6 +17,7 @@ plugins:
   - react
   - '@typescript-eslint'
 rules:
+  no-var-requires": true
   semi:
     - error
     - always
