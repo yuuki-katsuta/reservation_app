@@ -10,10 +10,39 @@ import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DoneIcon from "@material-ui/icons/Done";
 import dayjs from "dayjs";
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { IReservation } from "../models/IReservation";
 import { DateTimePicker } from "@material-ui/pickers";
+import { FormControl, MenuItem, Select } from "@material-ui/core";
+import { IFacility } from "../models/IFacility";
+
+const dummyFacilities: IFacility[] = [
+  {
+    id: "01",
+    name: "設備００１",
+    // ダミーデータのため不必要なデータの定義は省略
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    system: {} as any,
+    note: "",
+  },
+  {
+    id: "02",
+    name: "設備００２",
+    // ダミーデータのため不必要なデータの定義は省略
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    system: {} as any,
+    note: "",
+  },
+  {
+    id: "03",
+    name: "設備００３",
+    // ダミーデータのため不必要なデータの定義は省略
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    system: {} as any,
+    note: "",
+  },
+];
 
 const initReservation: IReservation = {
   id: "001",
@@ -39,13 +68,12 @@ const initReservation: IReservation = {
 };
 
 const useStyle = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-    },
-  },
   paper: {
     padding: theme.spacing(1),
+    //ネストセレクター
+    "& > div": {
+      marginBottom: theme.spacing(2),
+    },
   },
   rightActions: {
     textAlign: "right",
@@ -62,10 +90,34 @@ export const Reservation: React.FC = () => {
     defaultValues: initReservation,
     mode: "onBlur",
   });
+  const [facilities] = useState<IFacility[]>(dummyFacilities);
+  const facilityMenuItems = useMemo(() => {
+    return facilities.map((f) => (
+      <MenuItem key={f.id} value={f.id}>
+        {f.name}
+      </MenuItem>
+    ));
+  }, [facilities]);
 
   return (
-    <Container maxWidth="sm" className={style.root}>
+    <Container maxWidth="sm">
       <Paper className={style.paper}>
+        <FormControl>
+          <InputLabel id="facility-label">設備</InputLabel>
+          <Controller
+            name="facilityId"
+            control={control}
+            render={({ value, onChange }) => (
+              <Select
+                labelId="facility-label"
+                value={value}
+                onChange={onChange}
+              >
+                {facilityMenuItems}
+              </Select>
+            )}
+          />
+        </FormControl>
         <div style={{ display: "flex" }}>
           <Controller
             control={control}
