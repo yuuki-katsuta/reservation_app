@@ -29,6 +29,9 @@ const useStyle = makeStyles((theme) => ({
   leftActions: {
     textAlign: "left",
   },
+  cancelButton: {
+    color: theme.palette.error.main,
+  },
 }));
 const initFacility: IFacility = {
   id: "",
@@ -91,7 +94,7 @@ export const Facility: React.FC = () => {
         </p>
         <Grid container>
           <Grid item xs={6} className={style.leftActions}>
-            <Button variant="contained" startIcon={<DeleteIcon />}>
+            <Button className={style.cancelButton} startIcon={<DeleteIcon />}>
               削除
             </Button>
           </Grid>
