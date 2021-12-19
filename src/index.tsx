@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDom from "react-dom";
-import { Reservation } from "./components/Reservation";
+import { Routing } from "./components/Routing";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { Dayjs } from "dayjs";
 import Utils from "@date-io/dayjs";
+import { BrowserRouter } from "react-router-dom";
 import "dayjs/locale/ja";
 
 class ExtendedUtils extends Utils {
@@ -18,7 +19,9 @@ class ExtendedUtils extends Utils {
 
 ReactDom.render(
   <MuiPickersUtilsProvider utils={ExtendedUtils} locale="ja">
-    <Reservation />
+    <BrowserRouter>
+      <Routing />
+    </BrowserRouter>
   </MuiPickersUtilsProvider>,
   document.getElementById("container"),
 );
