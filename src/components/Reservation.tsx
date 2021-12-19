@@ -70,7 +70,7 @@ const initReservation: IReservation = {
 const useStyle = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(1),
-    //ネストセレクター
+    // ネストセレクター
     "& > div": {
       marginBottom: theme.spacing(2),
     },

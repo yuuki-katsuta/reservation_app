@@ -17,7 +17,7 @@ plugins:
   - react
   - '@typescript-eslint'
 rules:
-  no-var-requires": true
+  no-var-requires: 0
   semi:
     - error
     - always
@@ -28,4 +28,7 @@ rules:
     - argsIgnorePattern: '^_'
       varsIgnorePattern: '^_'
   prettier/prettier:
+    - error
+  no-use-before-define: off
+  "@typescript-eslint/no-use-before-define":
     - error

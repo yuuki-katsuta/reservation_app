@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from "react";
+import React from "react";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
@@ -55,7 +55,7 @@ const initFacility: IFacility = {
 export const Facility: React.FC = () => {
   const style = useStyle();
   const { system } = initFacility;
-  const { register, errors, control } = useForm({
+  const { errors, control } = useForm({
     defaultValues: initFacility,
     mode: "onBlur",
   });
